@@ -25,7 +25,7 @@
 - [Apple Calendar](https://support.apple.com/en-gb/guide/calendar/icl1023/mac)
 
  برای اضافه کردن مستقیم هنگام به گوگل‌کلندر، در قالب یک تقویم جداگانه، روی لینک زیر بزنید، و بعد از باز شدن آن، گزینه + در پایین صفحه را کلیک کنید تا هنگام به تقویم گوگل‌تان اضافه شود 
-- [Add Directly to Google Calendar](https://calendar.google.com/calendar/embed?src=lmjk2a8bh5s5npl076pjgsc4q4%40group.calendar.google.com&ctz=Asia%2FTehran)
+- [Add Directly to Google Calendar](https://calendar.google.com/calendar/embed?src=5peq5mk2kcugo90re9rug1191g%40group.calendar.google.com&ctz=Asia%2FTehran)
 
 
 ## نکته ای شایان ذکر
