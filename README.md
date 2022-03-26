@@ -1,4 +1,4 @@
-# هنگام
+# تقویم خورشیدی هنگام
 
 ![banner](./docs/banner.jpg)
 
@@ -7,25 +7,42 @@
 ## چرا هنگام؟
 اهل برنامه ریزی برای وقت تون هستید؟ از جدول کشیدن روی کاغذ خسته شدید؟🤦‍♂️ حالا وقتشه یک برنامه تقویم نصب کنید.
 
-ولی برنامه های تقویم که میلادی هستند چه کار کنم؟😥
+&nbsp; &nbsp; &nbsp; &nbsp; -ولی برنامه های تقویم که میلادی هستند چه کار کنم؟😥
 
-راستش هنگام اینجاست که کمک تون کنه...😁
+&nbsp; &nbsp; &nbsp; &nbsp; -راستش هنگام اینجاست که کمک تون کنه...😁
 
 برنامه تقویم گوشی یا لپ تاب تون رو فارسی کنید و براحتی برنامه ریزی کنید.
-دیگه یادتون نمیره تو چه ساعتی باید چه کاری رو انجام میدادید.
+دیگه یادتون نمیره تو چه ساعتی باید چه کاری را انجام میدادید.
 
-## اضافه کردن
-برای اضافه کردن تقویم خورشیدی هنگام به برنامه تقویم خود، فایل موجود در پوشه 
-[hengam1401](./hengam1401/)
-را بارگیری کنید.
-سپس در برنامه تقویم خود آن را وارد (ایمپورت) کنید.
+## نحوه استفاده
+در ابتدا نیاز است که هنگام را دانلود کنید.
+
+
+<p align = center>
+<a href = "https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/itismoradi/hengam/blob/master/hengam/hengam.calendar%40gmail.com.ics">
+    <img src = './docs/download.png'>
+</a>
+
+
+سپس فایل `ics` آن را در برنامه تقویم گوشی یا لپ تاب خود وارد (ایمپورت) کنید.
+
+### اضافه کردن مستقیم به تقویم گوگل
+در صورتی که از تقویم گوگل (**google calendar**) استفاده میکنید، میتوانید بدون نیاز به دانلود کردن هنگام، از طریق دکمه زیر آن را به تقویم خود اضافه کنید.
+<p align = center>
+<a href = "https://calendar.google.com/calendar/u/0?cid=aGVuZ2FtLmNhbGVuZGFyQGdtYWlsLmNvbQ">
+    <img src = './docs/add.png'>
+</a>
+</p>
+
+بعد از باز شدن صفحه تقویم، گزینه `+` در پایین صفحه را انتخاب کنید تا هنگام به تقویم گوگل شما اضافه شود.
+
 ### راهنمای اضافه کردن تقویم به
 - [Google Calendar](https://support.google.com/calendar/answer/37118?hl=en&co=GENIE.Platform%3DDesktop)
 - [Microsoft Outlook](https://support.microsoft.com/en-us/office/import-calendars-into-outlook-8e8364e1-400e-4c0f-a573-fe76b5a2d379)
 - [Apple Calendar](https://support.apple.com/en-gb/guide/calendar/icl1023/mac)
 
- برای اضافه کردن مستقیم هنگام به گوگل‌کلندر، در قالب یک تقویم جداگانه، روی لینک زیر بزنید، و بعد از باز شدن آن، گزینه + در پایین صفحه را کلیک کنید تا هنگام به تقویم گوگل‌تان اضافه شود 
-- [Add Directly to Google Calendar](https://calendar.google.com/calendar/u/0?cid=aGVuZ2FtLmNhbGVuZGFyQGdtYWlsLmNvbQ)
+ 
+
 
 
 ## نکته ای شایان ذکر
