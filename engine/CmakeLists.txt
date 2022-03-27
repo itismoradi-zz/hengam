@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.0)
+project("hengam engine")
+include_directories(lib/src)
+add_executable(app
+    main.cpp
+    engine.cpp
+)
