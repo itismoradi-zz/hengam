@@ -1,0 +1,3 @@
+[submodule "SCR-IR/jalaliDate-Cpp"]
+	path = engine/lib/SCR-IR-jalaliDate-Cpp
+	url = https://github.com/SCR-IR/jalaliDate-Cpp
