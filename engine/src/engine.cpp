@@ -23,6 +23,14 @@ void Engine::turnOn()
         file << "BEGIN:VEVENT" << endl;
         file << "DTSTART;VALUE=DATE:" << endl;
         file << "DTEND;VALUE=DATE:" << endl;
+        file << "DTSTAMP:" << Date::getSystemLocalDateTimeStr() << endl;
+        file << "UID:" << endl;
+        file << "CREATED:" << Date::getSystemLocalDateTimeStr() << endl;
+        file << "DESCRIPTION:" << endl;
+        file << "LAST-MODIFIED:" << Date::getSystemLocalDateTimeStr() << endl;
+        file << "LOCATION:" << endl;
+        file << "SEQUENCE:" << 0 << endl;
+        file << "STATUS:CONFIRMED" << endl;
         printSummary();
         file << "TRANSP:TRANSPARENT" << endl;
         file << "END:VEVENT" << endl;

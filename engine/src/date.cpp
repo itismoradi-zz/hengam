@@ -338,6 +338,47 @@ void Date::convertDate()
     }
 }
 
+struct tm Date::getSystemLocalDateTime()
+{
+    time_t now = time(0);
+    tm * itm = localtime(&now);
+    return *itm;
+}
+
+std::string Date::getSystemLocalDateTimeStr()
+{
+    struct tm dt = getSystemLocalDateTime();
+    string str = dateString(1900 + dt.tm_year, dt.tm_mon + 1, dt.tm_mday);
+    string time;
+    str += "T";
+    stringstream i;
+
+    //add hour
+    if(dt.tm_hour < 10)
+    {
+        i << 0;
+    }
+    i << dt.tm_hour;
+    //add minute
+    if(dt.tm_min < 10)
+    {
+        i << 0;
+    }
+    i << dt.tm_min;
+    //add second
+    if(dt.tm_sec < 10)
+    {
+        i << 0;
+    }
+    i << dt.tm_sec;
+    
+    i >> time;
+    str.append(time);
+    str += "Z";
+    return str;
+}
+
+
 short Date::day() const
 {
     return day_;

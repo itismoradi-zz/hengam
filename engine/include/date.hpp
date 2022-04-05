@@ -2,6 +2,7 @@
 #define DATE_IG
 
 #include <string>
+#include <ctime>
 
 enum JalaliMonth {FARVARDIN = 1, ORDIBEHESHT, KHORDAD, TIR, MORDAD, SHAHRIVAR, MEHR, ABAN, AZAR, DEY, BAHMAN, ESFAND};
 enum GregorianMonth {JANUARY = 1, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER};
@@ -27,6 +28,8 @@ public:
     std::string getJalaliDate();
     std::string getGregorianDate();
     void convertDate();
+    static struct tm getSystemLocalDateTime();
+    static std::string getSystemLocalDateTimeStr();
     short day() const;
     short month() const;
     std::string monthStr() const;
