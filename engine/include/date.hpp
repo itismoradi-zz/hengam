@@ -14,6 +14,9 @@ public:
     Date(std::string, Type);  //example: ("14001125", JALALI)
     Date(short, short, short, Type);
 
+    bool operator==(Date);
+    bool operator!=(Date);
+    void gotoTomorrow();
     bool isJalali() const;
     bool isGregorian() const;
     Type type() const;
@@ -34,6 +37,8 @@ private:
     short day_;
     short month_;
     short year_;
+    void gotoJalaliTomorrow();
+    void gotoGregorianTomorrow();
     
 };
 

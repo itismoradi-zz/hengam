@@ -20,6 +20,114 @@ Date::Date(short y, short m, short d, Type type)
     setDate(dateString(y, m, d), type);
 }
 
+bool Date::operator==(Date date)
+{
+    if(date.year_ == this->year_ && date.month_ == this->month_ && date.day_ == this->day_)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+bool Date::operator!=(Date date)
+{
+    return !(*this == date);
+}
+
+void Date::gotoTomorrow()
+{
+    if(isJalali())
+    {
+        gotoJalaliTomorrow();
+    }
+    else if(isGregorian())
+    {
+        gotoGregorianTomorrow();
+    }
+}
+
+void Date::gotoJalaliTomorrow()
+{
+    short y = year_;
+    short m = month_;
+    short d = day_;
+
+    if(m <= SHAHRIVAR)     //each month have 31 days
+    {
+        if(d < 31)
+        {
+            d++;
+        }
+        else if(d == 31)
+        {
+            d = 1;
+            m++;
+        }
+    }
+    else if(m >= MEHR && m != ESFAND)     //each month have 30 days
+    {
+        if(d < 30)
+        {
+            d++;
+        }
+        else if(d == 30)
+        {
+            d = 1;
+            m++;
+        }
+    }
+    else if(m == ESFAND)       //Esfand month have 29 days(30 days in leap years)
+    {
+        if(d < 29)
+        {
+            d++;
+        }
+        else if(isLeapJalaliYear(y))
+        {
+            if(d == 29)
+            {
+                d++;
+            }
+            else if(d == 30)
+            {
+                d = 1;
+                m = 1;
+                y++;
+            }
+        }
+        else
+        {
+            if(d == 29)
+            {
+                d = 1;
+                m = 1;
+                y++;
+            }
+        }
+    }
+
+    //validate calculated date
+    try
+    {
+        isValidDate(y, m, d, JALALI);
+        day_ = d;
+        month_ = m;
+        year_ = y;
+    }
+    catch(const std::exception& e)
+    {
+        cerr << e.what() << endl;
+        cerr << "error to go to tomorrow in Jalali calendar" << endl;
+    }
+}
+
+void Date::gotoGregorianTomorrow()
+{
+
+}
+
+
 bool Date::isJalali() const
 {
     if(type_ == JALALI)
@@ -49,18 +157,12 @@ void Date::setDate(string dateStr, Type type)
     short d = stoi(dateStr.substr(6, 2));
     
     //validation
-    try
+    if(isValidDate(y, m, d, type))
     {
-       isValidDate(y, m, d, type);
        year_ = y;
        month_ = m;
        day_ = d;
        type_ = type;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << endl;
-        throw;
     }
 }
 
@@ -216,7 +318,7 @@ std::string Date::dateString(short y, short m, short d)
 
 void Date::convertDate()
 {
-     if(isJalali())
+    if(isJalali())
     {
         long convertedDate[3];
         jalali_to_gregorian(year_, month_, day_, convertedDate);
