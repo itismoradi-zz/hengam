@@ -12,6 +12,7 @@ class Date
 public:
     Date();
     Date(std::string, Type);  //example: ("14001125", JALALI)
+    Date(short, short, short, Type);
 
     bool isJalali() const;
     bool isGregorian() const;
@@ -27,13 +28,13 @@ public:
     short month() const;
     std::string monthStr() const;
     short year() const;
-
+    static std::string dateString(short, short, short);
 private:
     Type type_;
     short day_;
     short month_;
     short year_;
-    std::string dateString() const;
+    
 };
 
 #endif

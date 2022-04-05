@@ -15,6 +15,11 @@ Date::Date(string dateStr, Type type)
     setDate(dateStr, type);
 }
 
+Date::Date(short y, short m, short d, Type type)
+{
+    setDate(dateString(y, m, d), type);
+}
+
 bool Date::isJalali() const
 {
     if(type_ == JALALI)
@@ -172,7 +177,7 @@ string Date::getJalaliDate()
     if(isGregorian())
         convertDate();
 
-    return dateString();
+    return dateString(year_, month_, day_);
 }
 
 string Date::getGregorianDate()
@@ -180,30 +185,30 @@ string Date::getGregorianDate()
     if(isJalali())
         convertDate();
 
-    return dateString();
+    return dateString(year_, month_, day_);
 }
 
-std::string Date::dateString() const
+std::string Date::dateString(short y, short m, short d)
 {
     string dateString;      //return value
     stringstream dateStream;
 
     //add year
-    dateStream << year_;
+    dateStream << y;
 
     //add month
-    if(month_ < 10)
+    if(m < 10)
     {
         dateStream << 0;
     }
-    dateStream << month_;
+    dateStream << m;
 
     //add day
-    if(day_ < 10)
+    if(d < 10)
     {
         dateStream << 0;
     }
-    dateStream << day_;
+    dateStream << d;
 
     dateStream >> dateString;
     return dateString;
