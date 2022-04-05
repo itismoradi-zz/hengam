@@ -2,3 +2,5 @@
 *.temp
 *.user
 engine/build/
+engine/.vscode/
+.vscode/

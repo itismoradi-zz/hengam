@@ -1,6 +1,8 @@
 #ifndef ENGINE_IG
 #define ENGINE_IG
 
+#include <date.hpp>
+
 class Engine
 {
 public:
@@ -9,6 +11,8 @@ public:
 private:
     short startJalaliYear;
     short endJalaliYear;
+    Date now;
+    Date final;
 };
 
 #endif

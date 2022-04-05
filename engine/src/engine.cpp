@@ -1,5 +1,4 @@
 #include "engine.hpp"
-#include "lib/src/converter.cpp"
 #include <iostream>
 #include <exception>
 using namespace std;
