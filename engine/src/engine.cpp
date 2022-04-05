@@ -16,9 +16,15 @@ void Engine::turnOn()
 {
     //print calendar properties
     printCalendarProperties();
+    cout << "hengam is calculating...\nplease wait" << endl;
 
     do
     {   
+        //print loading characters to wait user
+        if(((now.year() - startJalaliYear) % 5) == 0 && now.day() == 1 && now.month() == 1)
+        {
+            cout << "|";
+        } 
         //print every day event properties
         file << "BEGIN:VEVENT" << endl;
         file << "DTSTART;VALUE=DATE:" << endl;
@@ -39,6 +45,11 @@ void Engine::turnOn()
     while (now != final);
 
     file << "END:VCALENDAR" << endl;
+
+    cout << "\nhengam calendar icalendar file exported." << endl;
+    cout << "file name is -------> hengam.calendar@gmail.com.ics" << endl;
+    cout << "import this file to your phone or laptop calendar application,"
+    " plan your time and enjoy!" << endl;
 }
 
 void Engine::printCalendarProperties()
