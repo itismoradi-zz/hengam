@@ -18,11 +18,10 @@ int main()
     cin >> startJalaliYear;
     cout << "Enter << end >> year in jalali calendar : ";
     cin >> endJalaliYear;
-
-    Engine engine(startJalaliYear, endJalaliYear);
     
     try
     {
+        Engine engine(startJalaliYear, endJalaliYear);
         engine.turnOn();
     }
     catch(const std::exception& e)

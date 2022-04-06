@@ -12,7 +12,34 @@ Engine::Engine(short start, short end)
     file("hengam.calendar@gmail.com.ics", ios::out | ios::trunc),
     eng(static_cast<unsigned int>(time(0)))
 {
+    if(start > end)
+    {
+        throw invalid_argument("start year must be earlier than end year");
+    }
 
+    if(start < 1178 || end > 1633)    //Jalali algorithm supports only [1178, 1633] range
+    {
+        cout << "------- warning -----------------------------------------------------" << endl;
+        cout << "hengam engine has used Jalali algorithim to convert calendar dates" << endl;
+        cout << "The Jalali algorithm for the years outside 1178 to 1633 solar" << endl;
+        cout << "may not have the same leaps as the official iran calendars" << endl;
+        
+        char command;
+
+        do
+        {
+            cout << "do yo want to continue? (y/n) ";
+            cin >> command;
+            command = tolower(command);
+        } while (command != 'y' && command != 'n'); 
+
+        if(command == 'n')
+        {
+            throw invalid_argument("program finished");
+        }
+        
+        cout << "---------------------------------------------------------------------" << endl;
+    }
 }
 
 void Engine::turnOn()

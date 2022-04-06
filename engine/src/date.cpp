@@ -290,10 +290,6 @@ bool Date::isValidDate(short y, short m, short d, Type type) const
 
     if(type == JALALI)
     {
-        if(y < 1178 || y > 1633)    //Jalali algorithm supports only [1178, 1633] range
-        {
-            throw invalid_argument("invalid Jalali year input");
-        }
         //Jalali calendar rules
         if((m < MEHR && d > 31) || (m < ESFAND && m > SHAHRIVAR && d > 30))
         {
@@ -315,14 +311,6 @@ bool Date::isValidDate(short y, short m, short d, Type type) const
     }
     else if(type == GREGORIAN)
     {
-        if( (y == 1799 && m == MARCH && d < 21) || (y < 1799))   //first valid Gregorian date
-        {
-            throw invalid_argument("invalid Gregorian year input");
-        }
-        else if((y == 2254 && m == MARCH && d < 20) || (y > 2254))  //last valid Gregorian date
-        {
-            throw invalid_argument("invalid Gregorian year input");
-        }
         //Gregorian calendar rules
         if(m == JANUARY || m == MARCH || m == MAY || m == JULY || m == AUGUST || m == OCTOBER || m == DECEMBER)
         {
