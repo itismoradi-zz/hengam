@@ -27,7 +27,7 @@ void Engine::turnOn()
         } 
         //print every day event properties
         file << "BEGIN:VEVENT" << endl;
-        file << "DTSTART;VALUE=DATE:" << endl;
+        file << "DTSTART;VALUE=DATE:" << now.getGregorianDate() << endl;
         file << "DTEND;VALUE=DATE:" << endl;
         file << "DTSTAMP:" << Date::getSystemLocalDateTimeStr() << endl;
         file << "UID:" << endl;

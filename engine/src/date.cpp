@@ -276,18 +276,36 @@ bool Date::isLeapGregorianYear(short year)
 
 string Date::getJalaliDate()
 {
-    if(isGregorian())
-        convertDate();
-
-    return dateString(year_, month_, day_);
+    if(isJalali())
+    {
+        return dateString(year_, month_, day_);
+    }
+    else if(isGregorian())
+    {
+        long convertedDate[3];
+        gregorian_to_jalali(year_, month_, day_, convertedDate);
+        short y = convertedDate[0];
+        short m = convertedDate[1];
+        short d = convertedDate[2];
+        return dateString(y, m, d);
+    }
 }
 
 string Date::getGregorianDate()
 {
-    if(isJalali())
-        convertDate();
-
-    return dateString(year_, month_, day_);
+    if(isGregorian())
+    {
+        return dateString(year_, month_, day_);
+    }
+    else if(isJalali())
+    {
+        long convertedDate[3];
+        jalali_to_gregorian(year_, month_, day_, convertedDate);
+        short y = convertedDate[0];
+        short m = convertedDate[1];
+        short d = convertedDate[2];
+        return dateString(y, m, d);
+    }
 }
 
 std::string Date::dateString(short y, short m, short d)
@@ -371,7 +389,7 @@ std::string Date::getSystemLocalDateTimeStr()
         i << 0;
     }
     i << dt.tm_sec;
-    
+
     i >> time;
     str.append(time);
     str += "Z";
