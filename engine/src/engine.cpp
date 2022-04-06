@@ -1,13 +1,16 @@
 #include "engine.hpp"
 #include <iostream>
+#include <sstream>
 #include <exception>
+#include <ctime>
 
 using namespace std;
 
 Engine::Engine(short start, short end)
     : startJalaliYear(start), endJalaliYear(end),
     now(start, 1, 1, JALALI), final(end + 1, 1, 1, JALALI),
-    file("hengam.calendar@gmail.com.ics", ios::out | ios::trunc)
+    file("hengam.calendar@gmail.com.ics", ios::out | ios::trunc),
+    eng(static_cast<unsigned int>(time(0)))
 {
 
 }
@@ -30,7 +33,7 @@ void Engine::turnOn()
         file << "DTSTART;VALUE=DATE:" << now.getGregorianDate() << endl;
         file << "DTEND;VALUE=DATE:" << now.getGregorianTomorrowDate() << endl;
         file << "DTSTAMP:" << Date::getSystemLocalDateTimeStr() << endl;
-        file << "UID:" << endl;
+        printUID();
         file << "CREATED:" << Date::getSystemLocalDateTimeStr() << endl;
         file << "DESCRIPTION:" << endl;
         file << "LAST-MODIFIED:" << Date::getSystemLocalDateTimeStr() << endl;
@@ -67,4 +70,39 @@ void Engine::printCalendarProperties()
 void Engine::printSummary()
 {
     file << "SUMMARY:" << now.year() << "/" << now.month() << "/" << now.day() << endl;
+}
+
+void Engine::printUID()
+{
+    stringstream randomStream;
+    string uid;
+    uniform_int_distribution<unsigned int> r(0, 25);
+
+    for (size_t i = 0; i < 32; i++)
+    {
+        short number = r(eng);
+        bool isNumeric = number % 2;
+
+        if(isNumeric)   //numeric character
+        {
+            randomStream << number % 10;
+        }
+        else            //alphabetic character
+        {
+            bool isCapital = r(eng) % 2;
+
+            if(isCapital) 
+            {
+                randomStream << static_cast<char>(number + 'A');
+            }
+            else
+            {
+                randomStream << static_cast<char>(number + 'a');
+            }
+        }
+    }
+
+    randomStream >> uid;
+    uid.append("@hengam.calendar");
+    file << "UID:" << uid << endl;
 }
