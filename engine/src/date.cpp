@@ -37,17 +37,27 @@ bool Date::operator!=(Date date)
 
 void Date::gotoTomorrow()
 {
+    string tomorrow;
+
     if(isJalali())
     {
-        gotoJalaliTomorrow();
+        tomorrow = getJalaliTomorrowDate();
+        //converting tomorrow date string to integer
+        year_ = stoi(tomorrow.substr(0, 4));
+        month_ = stoi(tomorrow.substr(4, 2));
+        day_ = stoi(tomorrow.substr(6, 2));
     }
     else if(isGregorian())
     {
-        gotoGregorianTomorrow();
+        tomorrow = getGregorianTomorrowDate();
+        //converting tomorrow date string to integer
+        year_ = stoi(tomorrow.substr(0, 4));
+        month_ = stoi(tomorrow.substr(4, 2));
+        day_ = stoi(tomorrow.substr(6, 2));
     }
 }
 
-void Date::gotoJalaliTomorrow()
+string Date::getJalaliTomorrowDate() const
 {
     short y = year_;
     short m = month_;
@@ -77,7 +87,7 @@ void Date::gotoJalaliTomorrow()
             m++;
         }
     }
-    else if(m == ESFAND)       //Esfand month have 29 days(30 days in leap years)
+    else if(m == ESFAND)       //Esfand month has 29 days(30 days in leap years)
     {
         if(d < 29)
         {
@@ -111,9 +121,7 @@ void Date::gotoJalaliTomorrow()
     try
     {
         isValidDate(y, m, d, JALALI);
-        day_ = d;
-        month_ = m;
-        year_ = y;
+        return dateString(y, m, d);
     }
     catch(const std::exception& e)
     {
@@ -122,9 +130,110 @@ void Date::gotoJalaliTomorrow()
     }
 }
 
-void Date::gotoGregorianTomorrow()
+string Date::getGregorianTomorrowDate() const
 {
+    short y = year_;
+    short m = month_;
+    short d = day_;
+    short y2;
+    short m2;
+    short d2;
 
+    if(isJalali())
+    {
+        long convertedDate[3];
+        jalali_to_gregorian(y, m, d, convertedDate);
+        y2 = convertedDate[0];
+        m2 = convertedDate[1];
+        d2 = convertedDate[2];
+    }
+    else if(isGregorian())
+    {
+        y2 = y;
+        m2 = m;
+        d2 = d;
+    }
+    
+    //each month have 31 days
+    if(m2 == JANUARY || m2 == MARCH || m2 == MAY || m2 == JULY || m2 == AUGUST || m2 == OCTOBER)
+    {
+        if(d2 < 31)
+        {
+            d2++;
+        }
+        else if(d2 == 31)
+        {
+            d2 = 1;
+            m2++;
+        }
+    }
+    //each month have 30 days
+    else if(m2 == APRIL || m2 == JUNE || m2 == SEPTEMBER || m2 == NOVEMBER)
+    {
+        if(d2 < 30)
+        {
+            d2++;
+        }
+        else if(d2 == 30)
+        {
+            d2 = 1;
+            m2++;
+        }
+    }
+    //second month(FEBRUARY) in Gregorian calendar has 28 days but in leap year has 29 days
+    else if(m2 == FEBRUARY)
+    {
+        if(d2 < 28)
+        {
+            d2++;
+        }
+        else if(isLeapGregorianYear(y2))
+        {
+            if(d2 == 28)
+            {
+                d2++;
+            }
+            else if(d2 == 29)
+            {
+                d2 = 1;
+                m2 = MARCH;
+            }
+        }
+        else
+        {
+            if(d2 == 28)
+            {
+                d2 = 1;
+                m2 = MARCH;
+            }
+        }
+    }
+    //December is last month in year and have 31 days
+    else if(m2 == DECEMBER)
+    {
+        if(d2 < 31)
+        {
+            d2++;
+        }
+        else if(d2 == 31)
+        {
+            d2 = 1;
+            m2 = JANUARY;
+            y2++;
+        }
+    }
+
+    //validate calculated date
+    try
+    {
+        isValidDate(y2, m2, d2, GREGORIAN);
+        return dateString(y2, m2, d2);
+    }
+    catch(const std::exception& e)
+    {
+        cerr << e.what() << endl;
+        cerr << "error to go to tomorrow in Gregorian calendar" << endl;
+    }
 }
 
 
@@ -166,7 +275,7 @@ void Date::setDate(string dateStr, Type type)
     }
 }
 
-bool Date::isValidDate(short y, short m, short d, Type type)
+bool Date::isValidDate(short y, short m, short d, Type type) const
 {
     bool returnValue = false;
 
@@ -248,7 +357,7 @@ bool Date::isValidDate(short y, short m, short d, Type type)
     return returnValue;
 }
 
-bool Date::isLeapJalaliYear(short year)
+bool Date::isLeapJalaliYear(short year) const
 {  
     //https://github.com/SCR-IR/date-algorithms-article
     if((((year + 12) % 33) % 4) == 1)
@@ -261,7 +370,7 @@ bool Date::isLeapJalaliYear(short year)
     }
 }
 
-bool Date::isLeapGregorianYear(short year)
+bool Date::isLeapGregorianYear(short year) const
 {
     //https://www.tutorialspoint.com/cplusplus-program-to-check-leap-year
     if(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))

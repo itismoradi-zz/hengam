@@ -18,13 +18,15 @@ public:
     bool operator==(Date);
     bool operator!=(Date);
     void gotoTomorrow();
+    std::string getJalaliTomorrowDate() const;
+    std::string getGregorianTomorrowDate() const;
     bool isJalali() const;
     bool isGregorian() const;
     Type type() const;
     void setDate(std::string, Type);
-    bool isValidDate(short, short, short, Type);
-    bool isLeapJalaliYear(short);
-    bool isLeapGregorianYear(short);
+    bool isValidDate(short, short, short, Type) const;
+    bool isLeapJalaliYear(short) const;
+    bool isLeapGregorianYear(short) const;
     std::string getJalaliDate();
     std::string getGregorianDate();
     void convertDate();
@@ -40,9 +42,6 @@ private:
     short day_;
     short month_;
     short year_;
-    void gotoJalaliTomorrow();
-    void gotoGregorianTomorrow();
-    
 };
 
 #endif
