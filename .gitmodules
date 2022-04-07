@@ -1,0 +1,6 @@
+[submodule "engine/library/jalaliDate-Cpp"]
+	path = engine/library/jalaliDate-Cpp
+	url = https://github.com/SCR-IR/jalaliDate-Cpp.git
+[submodule "engine/library/hash-library"]
+	path = engine/library/hash-library
+	url = https://github.com/stbrumme/hash-library.git
