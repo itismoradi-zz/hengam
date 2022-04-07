@@ -411,6 +411,18 @@ std::string Date::dateString(short y, short m, short d)
     stringstream dateStream;
 
     //add year
+    if(y < 10)
+    {
+        dateStream << 0 << 0 << 0;
+    }
+    else if(y < 100)
+    {
+        dateStream << 0 << 0;
+    }
+    else if(y < 1000)
+    {
+        dateStream << 0;
+    }
     dateStream << y;
 
     //add month
