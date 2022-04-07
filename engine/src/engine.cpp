@@ -3,6 +3,8 @@
 #include <sstream>
 #include <exception>
 #include <ctime>
+#include <vector>
+#include "picosha2.h"
 
 using namespace std;
 
@@ -101,35 +103,13 @@ void Engine::printSummary()
 
 void Engine::printUID()
 {
-    stringstream randomStream;
-    string uid;
-    uniform_int_distribution<unsigned int> r(0, 25);
+    string src_str = now.getJalaliDate();
 
-    for (size_t i = 0; i < 32; i++)
-    {
-        short number = r(eng);
-        bool isNumeric = number % 2;
+    vector<unsigned char> hash(picosha2::k_digest_size);
+    picosha2::hash256(src_str.begin(), src_str.end(), hash.begin(), hash.end());
 
-        if(isNumeric)   //numeric character
-        {
-            randomStream << number % 10;
-        }
-        else            //alphabetic character
-        {
-            bool isCapital = r(eng) % 2;
-
-            if(isCapital) 
-            {
-                randomStream << static_cast<char>(number + 'A');
-            }
-            else
-            {
-                randomStream << static_cast<char>(number + 'a');
-            }
-        }
-    }
-
-    randomStream >> uid;
+    string uid = picosha2::bytes_to_hex_string(hash.begin(), hash.end());
+    
     uid.append("@hengam.calendar");
     file << "UID:" << uid << endl;
 }
