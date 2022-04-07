@@ -1,3 +1,0 @@
-[submodule "engine/lib"]
-	path = engine/lib/jalaliDate-Cpp
-	url = https://github.com/SCR-IR/jalaliDate-Cpp
