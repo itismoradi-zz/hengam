@@ -13,6 +13,8 @@ public:
     void printCalendarProperties();
     void printSummary();
     void printUID();
+    bool validateStartEndJalaliYear();
+    std::string getPersianWeekDay(WeekDay);
 private:
     short startJalaliYear;
     short endJalaliYear;
@@ -20,6 +22,7 @@ private:
     Date final;
     std::ofstream file;
     std::mt19937 eng;
+    WeekDay weekday;
 };
 
 #endif
