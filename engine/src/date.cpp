@@ -564,3 +564,45 @@ short Date::year() const
 {
     return year_;
 }
+
+WeekDay Date::weekDay(string dateStr)
+{
+    short h = 0;      //return value
+
+    if(dateStr.size() != 8)     //valid date string : year[4] month[2] day[2] : "14001105"
+        throw invalid_argument("invalid date string");
+
+    //converting date string to integer
+    short y = stoi(dateStr.substr(0, 4));
+    short m = stoi(dateStr.substr(4, 2));
+    short q = stoi(dateStr.substr(6, 2));
+
+    //m must be like this (3 = March, 4 = April, 5 = May, ..., 14 = February)
+    if(m == JANUARY || m == FEBRUARY)
+    {
+        m += 12;
+        y--;    //in this algorithm Jan and Feb considered as past year months
+    }
+
+    //K the year of the century
+    short k = y % 100;
+    //J is the zero-based century 
+    short j = y / 100;
+
+    //Zeller's congruence
+    //more information : https://en.wikipedia.org/wiki/Zeller%27s_congruence
+    h += q;
+    h += ( (13 * (m + 1) ) / 5);
+    h += k;
+    h += k / 4;
+    h += j / 4;
+    h -= 2 * j;
+    h %= 7;
+
+    if(h < 0)
+    {
+        h += 7;
+    }
+
+    return static_cast<WeekDay>(h);
+}

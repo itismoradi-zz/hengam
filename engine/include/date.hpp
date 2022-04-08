@@ -4,6 +4,7 @@
 #include <string>
 #include <ctime>
 
+enum WeekDay {SATURDAY = 0, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY};
 enum JalaliMonth {FARVARDIN = 1, ORDIBEHESHT, KHORDAD, TIR, MORDAD, SHAHRIVAR, MEHR, ABAN, AZAR, DEY, BAHMAN, ESFAND};
 enum GregorianMonth {JANUARY = 1, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER};
 enum Type {JALALI = 0, GREGORIAN = 1};
@@ -37,6 +38,7 @@ public:
     std::string monthStr() const;
     short year() const;
     static std::string dateString(short, short, short);
+    static WeekDay weekDay(std::string);    //only for Gregorian calendar
 private:
     Type type_;
     short day_;
