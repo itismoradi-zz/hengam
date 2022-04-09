@@ -128,6 +128,8 @@ string Date::getJalaliTomorrowDate() const
         cerr << e.what() << endl;
         cerr << "error to go to tomorrow in Jalali calendar" << endl;
     }
+
+    return "";  //fix compiler warnings
 }
 
 string Date::getGregorianTomorrowDate() const
@@ -234,6 +236,8 @@ string Date::getGregorianTomorrowDate() const
         cerr << e.what() << endl;
         cerr << "error to go to tomorrow in Gregorian calendar" << endl;
     }
+
+    return "";  //fix compiler warnings
 }
 
 
@@ -386,6 +390,8 @@ string Date::getJalaliDate()
         short d = convertedDate[2];
         return dateString(y, m, d);
     }
+
+    return "";  //fix compiler warnings
 }
 
 string Date::getGregorianDate()
@@ -403,6 +409,8 @@ string Date::getGregorianDate()
         short d = convertedDate[2];
         return dateString(y, m, d);
     }
+
+    return "";  //fix compiler warnings
 }
 
 std::string Date::dateString(short y, short m, short d)
@@ -554,10 +562,12 @@ std::string Date::monthStr() const
             case 10: return "October";
             case 11: return "November";
             case 12: return "December";
-            default:
+            default: 
                 throw;
         }
     }
+
+    return "";  //fix compiler warnings
 }
 
 short Date::year() const
