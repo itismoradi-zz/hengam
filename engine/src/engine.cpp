@@ -76,7 +76,7 @@ void Engine::printCalendarProperties()
 
 void Engine::setSummaryMode()
 {
-    char ch;
+    char ch = 'c';
     string command;
     cout << "\nPersonalize the title of your calendar days" << endl;
     //year
@@ -88,11 +88,16 @@ void Engine::setSummaryMode()
         {
             continue;
         }
-        ch = tolower(command.at(0));
+        else
+        {
+            ch = tolower(command.at(0));
+        }
     } 
     while (ch != 'y' && ch != 'n'); 
     mode.year = (ch == 'y') ? true : false;
+    
     //month
+    ch = 'c';
     do
     {
         cout << "    >) Should the title contain the << months >> ? (y/n) ";
@@ -101,13 +106,17 @@ void Engine::setSummaryMode()
         {
             continue;
         }
-        ch = tolower(command.at(0));
+        else
+        {
+            ch = tolower(command.at(0));
+        }
     } 
     while (ch != 'y' && ch != 'n'); 
 
     if(ch == 'y')
     {
         //month name
+        ch = 'c';
         mode.month = true;
         do
         {
@@ -117,7 +126,10 @@ void Engine::setSummaryMode()
             {
                 continue;
             }
-            ch = tolower(command.at(0));
+            else
+            {
+                ch = tolower(command.at(0));
+            }
         } 
         while (ch != 'y' && ch != 'n'); 
         mode.monthName = (ch == 'y') ? true : false;
@@ -129,6 +141,7 @@ void Engine::setSummaryMode()
     }
     
     //day
+    ch = 'c';
     do
     {
         cout << "    >) Should the title contain the << days >> ? (y/n) ";
@@ -137,11 +150,16 @@ void Engine::setSummaryMode()
         {
             continue;
         }
-        ch = tolower(command.at(0));
+        else
+        {
+            ch = tolower(command.at(0));
+        }
     } 
     while (ch != 'y' && ch != 'n'); 
     mode.day = (ch == 'y') ? true : false;
+
     //weekday
+    ch = 'c';
     do
     {
         cout << "    >) Should the title contain the << week days name >> like yekshanbeh ? (y/n) ";
@@ -150,7 +168,10 @@ void Engine::setSummaryMode()
         {
             continue;
         }
-        ch = tolower(command.at(0));
+        else
+        {
+            ch = tolower(command.at(0));
+        }
     } 
     while (ch != 'y' && ch != 'n'); 
     mode.weekday = (ch == 'y') ? true : false;
@@ -254,20 +275,25 @@ bool Engine::validateStartEndJalaliYear()
         cout << "The Jalali algorithm for the years outside 1178 to 1633 solar may" << endl;
         cout << "not have the same leaps as the official iran calendars." << endl;
         
-        char command;
+        char ch;
+        string command;
 
         do
         {
             cout << "do yo want to continue? (y/n) ";
             cin >> command;
-            command = tolower(command);
-        } while (command != 'y' && command != 'n'); 
+            
+            if(command.size() != 1)
+                continue;
+
+            ch = tolower(command.at(0));
+        } while (ch != 'y' && ch != 'n'); 
 
         cout << "---------------------------------------------------------------------" << endl;
 
-        if(command == 'n')
+        if(ch == 'n')
         {
-            throw invalid_argument("program finished");
+            throw invalid_argument("");
         }
 
     }

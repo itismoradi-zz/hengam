@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project("hengam engine")
 include_directories(library/PicoSHA2 include/)
-add_executable(app
+add_executable(hengamEngine
     src/main.cpp
     src/engine.cpp
     src/date.cpp

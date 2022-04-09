@@ -26,10 +26,12 @@ int main()
         Engine engine(startJalaliYear, endJalaliYear);
         engine.turnOn();
     }
-    catch(const std::exception& e)
+    catch(const exception& e)
     {
-        std::cerr << e.what() << '\n';
+        cerr << e.what() << '\n';
     }
 
+    cout << "program finished" << endl;
+    system("pause");
     return 0;
 }
