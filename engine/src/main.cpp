@@ -1,6 +1,6 @@
 /*
     hengam engine
-    automatic creation process of the hengam calendar
+    automatic creation processor of the hengam calendar
 */
 
 #include <iostream>
@@ -13,10 +13,12 @@ int main()
     short startJalaliYear;
     short endJalaliYear;
 
-    cout << "hengam engine" << endl;
-    cout << "Enter << start >> year in jalali calendar : ";
+    Engine::splashScreen();
+
+    cout << "Enter years in Jalali calendar" << endl;
+    cout << "    >) Enter << start >> year : ";
     cin >> startJalaliYear;
-    cout << "Enter << end >> year in jalali calendar : ";
+    cout << "    >) Enter <<  end  >> year : ";
     cin >> endJalaliYear;
     
     try

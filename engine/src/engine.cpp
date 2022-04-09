@@ -16,6 +16,7 @@ Engine::Engine(short start, short end)
     eng(static_cast<unsigned int>(time(0)))
 {
     validateStartEndJalaliYear();
+    setSummaryMode();
     weekday = Date::weekDay(now.getGregorianDate());
 }
 
@@ -23,7 +24,7 @@ void Engine::turnOn()
 {
     //print calendar properties
     printCalendarProperties();
-    cout << "hengam is calculating...\nplease wait" << endl;
+    cout << "\nhengam is calculating...\nplease wait" << endl;
 
     do
     {   
@@ -55,10 +56,10 @@ void Engine::turnOn()
 
     file << "END:VCALENDAR" << endl;
 
-    cout << "\nhengam calendar icalendar file exported." << endl;
+    cout << "\n\nhengam calendar icalendar file exported." << endl;
     cout << "file name is -------> hengam.calendar@gmail.com.ics" << endl;
-    cout << "import this file to your phone or laptop calendar application,"
-    " plan your time and enjoy!" << endl;
+    cout << "you can import this file to your calendar application"
+    " and work with Jalali calendar" << endl;
 }
 
 void Engine::printCalendarProperties()
@@ -73,9 +74,157 @@ void Engine::printCalendarProperties()
     file << "X-WR-CALDESC:تقویم خورشیدی با روز های هفته و مناسبت ها" << endl;
 }
 
+void Engine::setSummaryMode()
+{
+    char ch;
+    string command;
+    cout << "\nPersonalize the title of your calendar days" << endl;
+    //year
+    do
+    {
+        cout << "    >) Should the title contain the << year >> ? (y/n) ";
+        cin >> command;
+        if(command.size() != 1)
+        {
+            continue;
+        }
+        ch = tolower(command.at(0));
+    } 
+    while (ch != 'y' && ch != 'n'); 
+    mode.year = (ch == 'y') ? true : false;
+    //month
+    do
+    {
+        cout << "    >) Should the title contain the << months >> ? (y/n) ";
+        cin >> command;
+        if(command.size() != 1)
+        {
+            continue;
+        }
+        ch = tolower(command.at(0));
+    } 
+    while (ch != 'y' && ch != 'n'); 
+
+    if(ch == 'y')
+    {
+        //month name
+        mode.month = true;
+        do
+        {
+            cout << "        >) does show month name instead month number? like Farvardin (y/n) ";
+            cin >> command;
+            if(command.size() != 1)
+            {
+                continue;
+            }
+            ch = tolower(command.at(0));
+        } 
+        while (ch != 'y' && ch != 'n'); 
+        mode.monthName = (ch == 'y') ? true : false;
+    }
+    else
+    {
+        mode.month = false;
+        mode.monthName = false;
+    }
+    
+    //day
+    do
+    {
+        cout << "    >) Should the title contain the << days >> ? (y/n) ";
+        cin >> command;
+        if(command.size() != 1)
+        {
+            continue;
+        }
+        ch = tolower(command.at(0));
+    } 
+    while (ch != 'y' && ch != 'n'); 
+    mode.day = (ch == 'y') ? true : false;
+    //weekday
+    do
+    {
+        cout << "    >) Should the title contain the << week days name >> like yekshanbeh ? (y/n) ";
+        cin >> command;
+        if(command.size() != 1)
+        {
+            continue;
+        }
+        ch = tolower(command.at(0));
+    } 
+    while (ch != 'y' && ch != 'n'); 
+    mode.weekday = (ch == 'y') ? true : false;
+}
+
 void Engine::printSummary()
 {
-    file << "SUMMARY:" << now.year() << "/" << now.month() << "/" << now.day() << endl;
+    file << "SUMMARY:";
+    short y = now.year();
+
+    if(mode.weekday)
+    {
+        file << getPersianWeekDay(this->weekday);
+
+        if(mode.day || mode.month || mode.year)
+        {
+            file << " ";    //space character to beautify event title in calendar views
+        }
+    }
+
+    if(mode.day)
+    {
+        file << now.day();
+
+        if(mode.monthName)
+        {
+            file << " ";
+        }
+        else
+        {
+            file << "/";
+        } 
+    }
+
+    if(mode.month)
+    {
+        if(mode.monthName)      //month name like Bahman
+        {
+            file << getPersianMonth(static_cast<JalaliMonth>(now.month()));
+            file << " ";
+        }
+        else    //month number like 11
+        {
+            if(y < 10)
+            {
+                file << 0;
+            }
+            file << now.month();
+
+            if(mode.year)
+            {
+                file << "/";
+            }
+        }
+    }
+
+    if(mode.year)
+    {
+        if(y < 10)
+        {
+            file << 0 << 0 << 0;
+        }
+        else if(y < 100)
+        {
+            file << 0 << 0;
+        }
+        else if(y < 1000)
+        {
+            file << 0;
+        }
+        file << y;
+    }
+
+    file << endl;
 }
 
 void Engine::printUID()
@@ -100,10 +249,10 @@ bool Engine::validateStartEndJalaliYear()
 
     if(startJalaliYear < 1178 || endJalaliYear > 1633)    //Jalali algorithm supports only [1178, 1633] range
     {
-        cout << "------- warning -----------------------------------------------------" << endl;
+        cout << "\n------- warning -----------------------------------------------------" << endl;
         cout << "hengam engine has used Jalali algorithim to convert calendar dates" << endl;
-        cout << "The Jalali algorithm for the years outside 1178 to 1633 solar" << endl;
-        cout << "may not have the same leaps as the official iran calendars" << endl;
+        cout << "The Jalali algorithm for the years outside 1178 to 1633 solar may" << endl;
+        cout << "not have the same leaps as the official iran calendars." << endl;
         
         char command;
 
@@ -114,12 +263,13 @@ bool Engine::validateStartEndJalaliYear()
             command = tolower(command);
         } while (command != 'y' && command != 'n'); 
 
+        cout << "---------------------------------------------------------------------" << endl;
+
         if(command == 'n')
         {
             throw invalid_argument("program finished");
         }
-        
-        cout << "---------------------------------------------------------------------" << endl;
+
     }
 }
 
@@ -134,6 +284,27 @@ string Engine::getPersianWeekDay(WeekDay d)
         case WEDNESDAY : return "چهارشنبه";
         case THURSDAY  : return "پنجشنبه";
         case FRIDAY    : return "جمعه";
+        default : throw invalid_argument("invalid week day sent to getPersianWeekDay");
+    }
+}
+
+string Engine::getPersianMonth(JalaliMonth m)
+{
+    switch (m)
+    {
+        case FARVARDIN   : return "فروردین";
+        case ORDIBEHESHT : return "اردیبهشت";
+        case KHORDAD     : return "خرداد";
+        case TIR         : return "تیر";
+        case MORDAD      : return "مرداد";
+        case SHAHRIVAR   : return "شهریور";
+        case MEHR        : return "مهر";
+        case ABAN        : return "آبان";
+        case AZAR        : return "آذر";
+        case DEY         : return "دی";
+        case BAHMAN      : return "بهمن";
+        case ESFAND      : return "اسفند";
+        default : throw invalid_argument("invalid month number sent to getPersianMonth");
     }
 }
 
@@ -141,4 +312,29 @@ WeekDay operator++(WeekDay & d, int)
 {
     d = static_cast<WeekDay>((static_cast<short>(d) + 1) % 7);
     return d;
+}
+void Engine::splashScreen()
+{
+    cout << "      /------------------------\\\n"
+                "      |                        |\n"
+                "      |  SA SU MO TU WE TH FR  |          /----------\\\n"
+                "      |      1  2  3  4  5  6  |         /|          |\\\n"
+                "      |   7  8  9 10 11 12 13  |         ++  hengam  ++\n"
+                "      |  14 15 16 17 18 19 20  |         ++  engine  ++\n"
+                "      |  21 22 23 24 25 26 27  |         \\|          |/\n"
+                "      |  28 29 30 31           |          |          |\n"
+                "      |                        |          |  !!!!!!  |\n"
+                "      \\------------------------//         |          |\n"
+                "     / - - - - - - - - - - - -//          \\-------#--/\n"
+                "    / - - - - - - - - - - - -//                   |\n"
+                "   / - - - - - - - - - - - -//                    |\n"
+                "  / - - - - - - - - - - - -// <-------------------+\n"
+                " /---------/----/---------//\n"
+                "/         /    /         // \n"
+                "\\------------------------/\n";
+    cout << endl; //https://asciiflow.com/#/
+    cout << "|||  automatic creation processor of the hengam calendar  |||\n" << endl;
+    cout << "hengam engine converts gregorian years to jalali calendar years\n"
+    "and exports .ics file. you can import exported file to your laptop,\n"
+    "pc or phone calendar app and use jalali calendar, plan and enjoy.\n" << endl;
 }
