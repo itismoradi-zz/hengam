@@ -1,9 +1,9 @@
-# تقویم خورشیدی هنگام
+# افزونه تقویم خورشیدی هنگام
 
-![banner](./docs/banner.jpg)
+![hengam](https://user-images.githubusercontent.com/75095946/162616656-681b2526-b793-4f19-a2d9-d7707af9a563.jpg)
 
 ## هنگام چیست؟
-هنگام یک افزونه 📆تقویم خورشیدی است که می تواند به برنامه تقویم 📱گوشی یا 💻لپ تاب شما اضافه شود.
+هنگام یک افزونه 📆تقویم خورشیدی است که می تواند به برنامه تقویم 📱گوشی یا 💻لپ تاپ شما اضافه شود.
 ## چرا هنگام؟
 اهل برنامه ریزی برای وقت تون هستید؟ از جدول کشیدن روی کاغذ خسته شدید؟🤦‍♂️ حالا وقتشه یک برنامه تقویم نصب کنید.
 
@@ -11,35 +11,50 @@
 
 &nbsp; &nbsp; &nbsp; &nbsp; -راستش هنگام اینجاست که کمک تون کنه...😁
 
-برنامه تقویم گوشی یا لپ تاب تون رو فارسی کنید و براحتی برنامه ریزی کنید.
+برنامه تقویم گوشی یا لپ تاپ تون رو فارسی کنید و براحتی برنامه ریزی کنید.
 دیگه یادتون نمیره تو چه ساعتی باید چه کاری را انجام میدادید.
 
 ## نحوه استفاده
 در ابتدا نیاز است که هنگام را دانلود کنید.
 
-
 <p align = center>
 <a href = "https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/itismoradi/hengam/blob/master/hengam/hengam.calendar%40gmail.com.ics">
-    <img src = './docs/download.png'>
+    <img src = 'https://user-images.githubusercontent.com/75095946/162615760-dcdec30c-bae9-4cdc-804c-44baf5547e78.png'>
 </a>
 
 
-سپس فایل `ics` آن را در برنامه تقویم گوشی یا لپ تاب خود وارد (ایمپورت) کنید.
+سپس فایل `ics` آن را در برنامه تقویم گوشی یا لپ تاپ خود وارد (ایمپورت) کنید. به همین راحتی 😉✌
 
 ### اضافه کردن مستقیم به تقویم گوگل
 در صورتی که از تقویم گوگل (**google calendar**) استفاده میکنید، میتوانید بدون نیاز به دانلود کردن هنگام، از طریق دکمه زیر آن را به تقویم خود اضافه کنید.
 <p align = center>
 <a href = "https://calendar.google.com/calendar/u/0?cid=aGVuZ2FtLmNhbGVuZGFyQGdtYWlsLmNvbQ">
-    <img src = './docs/add.png'>
+    <img src = 'https://user-images.githubusercontent.com/75095946/162615780-6c56952a-4337-4a37-ae9a-6afa46e0fbb9.png'>
 </a>
 </p>
 
 بعد از باز شدن صفحه تقویم، گزینه `+` در پایین صفحه را انتخاب کنید تا هنگام به تقویم گوگل شما اضافه شود.
 
-### راهنمای اضافه کردن تقویم به
+### استفاده از لینک [webcal](https://en.wikipedia.org/wiki/Webcal)
+![webcal](https://user-images.githubusercontent.com/75095946/162615820-2be97dbe-5ab4-4813-bbda-1d42a0810d6a.jpg)
+
+همچنین شما میتوانید از روش دنبال کردنِ تقویم هنگام هم استفاده کنید. کافیست در برنامه تقویم خود قسمت
+`Subscribe Calendar`
+را پیدا کنید و لینک زیر را در آن درج کنید.
+
+
+```
+https://calendar.google.com/calendar/ical/hengam.calendar%40gmail.com/public/basic.ics
+```
+
+این قسمت ممکن است در برنامه های مختلف تقویم نام های متفاوتی داشته باشد. یکم بگردید دنبالش پیدا میشه 😄
+
+### راهنما
+اگر موفق به اضافه کردن نشدید، مطالب زیر شاید بتونه کمک تون کنه.
 - [Google Calendar](https://support.google.com/calendar/answer/37118?hl=en&co=GENIE.Platform%3DDesktop)
 - [Microsoft Outlook](https://support.microsoft.com/en-us/office/import-calendars-into-outlook-8e8364e1-400e-4c0f-a573-fe76b5a2d379)
 - [Apple Calendar](https://support.apple.com/en-gb/guide/calendar/icl1023/mac)
+- [yahoo! Calendar](https://help.yahoo.com/kb/SLN4707.html)
 
  
 
