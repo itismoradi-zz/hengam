@@ -211,7 +211,11 @@ void Engine::printSummary()
         if(mode.monthName)      //month name like Bahman
         {
             file << getPersianMonth(static_cast<JalaliMonth>(now.month()));
-            file << " ";
+            
+            if(mode.year)
+            {
+                file << " ";
+            }
         }
         else    //month number like 11
         {
