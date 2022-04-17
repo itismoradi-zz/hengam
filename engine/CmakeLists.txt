@@ -6,3 +6,6 @@ add_executable(hengamEngine
     src/engine.cpp
     src/date.cpp
 )
+if (WIN32)
+    add_compile_options(-static-libgcc -static-libstdc++)
+endif (WIN32)
